@@ -4,13 +4,19 @@ var iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 
 </svg>
 `;
 
+var errorSvg = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="40px" width="40px">
+<path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+</svg>
+`;
+
 let jsonData;
 
 var itemPage = document.getElementById("item");
+var itemsList = document.getElementById("items");
 var mainCarousel = document.getElementById("carousel");
 
 const openVideoTab = (item) => {
-  document.getElementById("items").style.display = "none";
+  itemsList.getElementById("items").style.display = "none";
 
   let itemTitle = document.createElement("h1");
   itemTitle.textContent = item.name;
@@ -28,18 +34,16 @@ const openVideoTab = (item) => {
     },
     true
   );
-
   itemPage.appendChild(video);
 };
 
 const closeVideoTab = () => {
-  document.getElementById("item").style.display = "none";
-  document.getElementById("items").style.display = "block";
-  document.getElementById("item").innerHTML = "";
+  itemPage.style.display = "none";
+  itemPage.innerHTML = "";
+  itemsList.style.display = "block";
 };
 
 async function streamsData() {
-  loadingData = true;
   const response = await fetch(
     "https://cdn-media.brightline.tv/training/demo.json",
     {
@@ -47,15 +51,35 @@ async function streamsData() {
     }
   );
   jsonData = await response.json();
-  loadingData = false;
+
+  jsonData == undefined ? alert("API error") : displayData(jsonData);
 }
 
-const displayData = () => {
-  jsonData.streams.forEach((item) => {
+const displayData = (data) => {
+  data.streams.forEach((item) => {
     if (item.name && item.mediaFile) {
       let itemHtml = document.createElement("div");
       itemHtml.className = "item-card";
-      itemHtml.innerHTML = `<div>${iconSvg}</div><div class="item-title">${item.name}</div>`;
+      let thumbnailHtml = ``;
+
+      let checkVideo = document.createElement("video");
+      checkVideo.src = item.mediaFile;
+
+      checkVideo.oncanplay = () => {
+        thumbnailHtml = `<video src=${item.mediaFile}></video>`;
+
+        itemHtml.innerHTML = `${thumbnailHtml} <div class="item-footer"><div>${iconSvg}</div><div class="item-title">${item.name}</div></div>`;
+        itemHtml.addEventListener(
+          "click",
+          function () {
+            openVideoTab(item);
+          },
+          false
+        );
+      };
+
+      thumbnailHtml = `<div class="error-icon">${errorSvg}</div>`;
+      itemHtml.innerHTML = `${thumbnailHtml} <div class="item-footer"><div>${iconSvg}</div><div class="item-title">${item.name}</div></div>`;
       itemHtml.addEventListener(
         "click",
         function () {
@@ -74,6 +98,7 @@ var currentItem = 0;
 const navigateItems = () => {
   var selectedItem = document.getElementsByClassName("item-card")[currentItem];
   selectedItem.focus();
+  selectedItem.scrollIntoView();
   selectedItem.classList.add("item-card-focused");
   if (currentItem > 0)
     selectedItem.previousElementSibling.classList.remove("item-card-focused");
@@ -110,7 +135,7 @@ document.addEventListener("keydown", function (event) {
 
 async function app() {
   await streamsData();
-  displayData();
+  openVideoTab(jsonData.streams[0]);
   navigateItems();
 }
 

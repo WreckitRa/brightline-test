@@ -11,9 +11,13 @@ h1 {
 
 #carousel {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   gap: 8px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  height: fit-content;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .item-card {
@@ -22,18 +26,38 @@ h1 {
   padding: 20px 10px 20px 10px;
   border-radius: 8px;
   font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
   box-shadow: 0 1px 3px 0 #d1d5db, 0 1px 2px -1px #d1d5db;
-  width: 176px;
-  height: 48px;
+  min-width: 320px;
+  min-height: 192px;
+  width: 320px;
+  height: 192px;
   cursor: pointer;
+}
+
+.item-card video {
+  width: 320px;
+  height: 176px;
+  border-radius: 6px;
+}
+
+.item-card .error-icon {
+  width: 320px;
+  height: 176px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .item-card-focused {
   color: #5b21b6;
   box-shadow: 0 10px 15px -3px#9ca3af, 0 4px 6px -4px#9ca3af;
+}
+
+.item-footer {
+  align-items: center;
+  gap: 4px;
+  display: flex;
 }
 
 .item-title {
