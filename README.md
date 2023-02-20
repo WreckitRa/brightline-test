@@ -12,4 +12,5 @@
 - Use `Enter` to open the selected card
 - Use `Backspace` to go to the main cards list
 
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+https://user-images.githubusercontent.com/59966106/220201504-309d5bf7-c987-4976-b293-e6c302925aeb.mov
+
