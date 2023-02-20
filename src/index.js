@@ -16,7 +16,7 @@ var itemsList = document.getElementById("items");
 var mainCarousel = document.getElementById("carousel");
 
 const openVideoTab = (item) => {
-  itemsList.getElementById("items").style.display = "none";
+  itemsList.style.display = "none";
 
   let itemTitle = document.createElement("h1");
   itemTitle.textContent = item.name;
