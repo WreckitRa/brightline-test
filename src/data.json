@@ -1,0 +1,20 @@
+{
+  "streams": [
+    {
+      "name": "Scrollable Carousel - BMW Mini 1",
+      "mediaFile": "https://cdn-media.brightline.tv/demo/ces2023/creatives/isso_mini/media/videos/01_hulu_brightline_south_december_video_windowed_bl720.mp4"
+    },
+    {
+      "name": "Scrollable Carousel - BMW Mini 2",
+      "mediaFile": "https://cdn-media.brightline.tv/campaigns/brightline/certification/vizio/all/media/videos/countdown_30.mp4"
+    },
+    {
+      "name": "Scrollable Carousel - BMW Mini 3",
+      "mediaFile": "https://cdn-media.brightline.tv/demo/ces2023/creatives/isso_mini/media/videos/01_hulu_brightline_south_december_video_windowed_bl720.mp4"
+    },
+    {
+      "name": "Scrollable Carousel - Vizzy",
+      "mediaFile": "https://3860af3e8e3fbfdb.mediapackage.us-east-2.amazonaws.com/out/v1/791e60d1176b4746aabf4e580a1c0611/index.m3u8"
+    }
+  ]
+}
